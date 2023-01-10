@@ -1,0 +1,9 @@
+services: 
+  backend: 
+    build:
+     context: app
+     target: builder
+    image: 'nilord/talita-reader-backend:1.0'
+    restart: unless-stopped
+    ports: 
+      - '5000:5000'

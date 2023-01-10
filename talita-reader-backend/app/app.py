@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 # Creamos la aplicación Flask
 app = Flask(__name__)
-CORS(app, origins=['http://localhost:4200'])
+CORS(app, origins=['*'])
 
 # Definimos el endpoint que manejará las solicitudes POST
 @app.route('/process-pdf', methods=['POST'])
@@ -38,4 +38,4 @@ def process_pdf():
 
 # Iniciamos la aplicación
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
