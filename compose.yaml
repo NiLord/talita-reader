@@ -1,8 +1,6 @@
 services: 
-  backend: 
-    build:
-     context: app
-     target: builder
+  api-python:
+    build: talita-reader-backend/app/.
     image: 'nilord/talita-reader-backend:1.0'
     restart: unless-stopped
     ports: 
