@@ -47,6 +47,9 @@ export class PdfUpdateComponent {
               this.firstPDF = resultado;
             }else{
               this.secondPDF = resultado;
+            }
+
+            if(this.firstPDF && this.secondPDF) {
               this.daysDiference = this.calcularDiferenciaEnDias(this.firstPDF?.date, this.secondPDF?.date);
             }
             console.log(resultado);

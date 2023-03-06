@@ -53,6 +53,7 @@
       <th>Info al {{secondPDF?.date?.split(" ")[0]}}</th>
       <th>Diferencia entre mediciones</th>
       <th>Promedio x dia</th>
+      <th>Promedio x semana</th>
       <th>Diferencia con deseable</th>
     </tr>
     <tr>
@@ -61,31 +62,170 @@
       <td class="centrado">{{secondPDF?.date}}</td>
       <td class="centrado">{{daysDiference}} dias</td>
       <td class="centrado"> N/A </td>
+      <td class="centrado"> N/A </td>
       <td class="centrado"> N/A</td>
     </tr>
     <tr>
       <td>Peso</td>
       <td class="centrado">{{firstPDF?.results?.weight}} lbs</td>
       <td class="centrado">{{secondPDF?.results?.weight}} lbs</td>
-      <td class="centrado">{{ (firstPDF?.results?.weight - secondPDF?.results?.weight) | toFixed:2:"up"}} lbs</td>
-      <td class="centrado">{{ ((firstPDF?.results?.weight - secondPDF?.results?.weight) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ (secondPDF?.results?.weight - firstPDF?.results?.weight) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.weight - firstPDF?.results?.weight) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.weight - firstPDF?.results?.weight) / daysDiference) * 7  | toFixed:2:"up"}} lbs x semana</td>
       <td class="centrado">{{secondPDF?.results?.weight >= firstPDF?.results?.desirableData?.min_weight &&  secondPDF?.results?.weight <= firstPDF?.results?.desirableData?.max_weight ? "Logrado" : (secondPDF?.results?.weight - firstPDF?.results?.desirableData?.max_weight | toFixed:2:"up") + " lbs"}} </td>
     </tr>
     <tr>
       <td>Indice de masa corporal</td>
       <td class="centrado">{{firstPDF?.results?.body_mass_index}} %</td>
       <td class="centrado">{{secondPDF?.results?.body_mass_index}} %</td>
-      <td class="centrado">{{ (firstPDF?.results?.body_mass_index - secondPDF?.results?.body_mass_index) | toFixed:2:"up"}} %</td>
-      <td class="centrado">{{ ((firstPDF?.results?.body_mass_index - secondPDF?.results?.body_mass_index) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{ (secondPDF?.results?.body_mass_index - firstPDF?.results?.body_mass_index) | toFixed:2:"up"}} %</td>
+      <td class="centrado">{{ ((secondPDF?.results?.body_mass_index - firstPDF?.results?.body_mass_index) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.body_mass_index - firstPDF?.results?.body_mass_index) / daysDiference) * 7 | toFixed:2:"up"}} % x semana</td>
       <td class="centrado">{{secondPDF?.results?.body_mass_index >= firstPDF?.results?.desirableData?.min_bmi &&  secondPDF?.results?.body_mass_index <= firstPDF?.results?.desirableData?.max_bmi ? "Logrado" : (secondPDF?.results?.body_mass_index - firstPDF?.results?.desirableData?.max_bmi | toFixed:2:"up") + " %"}} </td>
+    </tr>
+    <tr>
+      <td>Grasa viseral</td>
+      <td class="centrado">{{firstPDF?.results?.viceral_fat_rating}}</td>
+      <td class="centrado">{{secondPDF?.results?.viceral_fat_rating}}</td>
+      <td class="centrado">{{ (firstPDF?.results?.viceral_fat_rating === secondPDF?.results?.viceral_fat_rating) ? "Sin cambios" : secondPDF?.results?.viceral_fat_rating - firstPDF?.results?.viceral_fat_rating}}</td>
+      <td class="centrado">{{ ((secondPDF?.results?.viceral_fat_rating - firstPDF?.results?.viceral_fat_rating) / daysDiference) | toFixed:2:"up"}} x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.viceral_fat_rating - firstPDF?.results?.viceral_fat_rating) / daysDiference) * 7| toFixed:2:"up"}} x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Rango de Grasa</td>
+      <td class="centrado">{{firstPDF?.results?.body_fat_category}}</td>
+      <td class="centrado">{{secondPDF?.results?.body_fat_category}}</td>
+      <td class="centrado">{{ (firstPDF?.results?.body_fat_category === secondPDF?.results?.body_fat_category) ? "Sin cambios" : secondPDF?.results?.body_fat_category}}</td>
+      <td class="centrado">N/A</td>
+      <td class="centrado">N/A</td>
+      <td class="centrado">N/A</td>
     </tr>
     <tr>
       <td>Porcentaje de grasa</td>
       <td class="centrado">{{firstPDF?.results?.body_fat}} %</td>
       <td class="centrado">{{secondPDF?.results?.body_fat}} %</td>
-      <td class="centrado">{{ (firstPDF?.results?.body_fat - secondPDF?.results?.body_fat) | toFixed:2:"up"}} %</td>
-      <td class="centrado">{{ ((firstPDF?.results?.body_fat - secondPDF?.results?.body_fat) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{ (secondPDF?.results?.body_fat - firstPDF?.results?.body_fat) | toFixed:2:"up"}} %</td>
+      <td class="centrado">{{ ((secondPDF?.results?.body_fat - firstPDF?.results?.body_fat) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.body_fat - firstPDF?.results?.body_fat) / daysDiference) * 7| toFixed:2:"up"}} % x semana</td>
       <td class="centrado">{{secondPDF?.results?.body_fat >= firstPDF?.results?.desirableData?.min_fat_porcentage &&  secondPDF?.results?.body_fat <= firstPDF?.results?.desirableData?.max_fat_porcentage ? "Logrado" : (secondPDF?.results?.body_fat - firstPDF?.results?.desirableData?.max_fat_porcentage | toFixed:2:"up") + " %"}} </td>
+    </tr>
+    <tr>
+      <td>Masa grasa</td>
+      <td class="centrado">{{firstPDF?.results?.body_fat_mass}} lbs</td>
+      <td class="centrado">{{secondPDF?.results?.body_fat_mass}} lbs</td>
+      <td class="centrado">{{ (secondPDF?.results?.body_fat_mass - firstPDF?.results?.body_fat_mass) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.body_fat_mass - firstPDF?.results?.body_fat_mass) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.body_fat_mass - firstPDF?.results?.body_fat_mass) / daysDiference) * 7 | toFixed:2:"up"}} lbs x semana</td>
+      <td class="centrado">{{secondPDF?.results?.body_fat_mass >= firstPDF?.results?.desirableData?.max_fat_mass &&  secondPDF?.results?.body_fat_mass <= firstPDF?.results?.desirableData?.max_fat_mass ? "Logrado" : (secondPDF?.results?.body_fat_mass - firstPDF?.results?.desirableData?.max_fat_mass | toFixed:2:"up") + " lbs"}} </td>
+    </tr>
+    <tr>
+      <td>Masa LIBRE de grasa</td>
+      <td class="centrado">{{firstPDF?.results?.fat_free_mass}} lbs</td>
+      <td class="centrado">{{secondPDF?.results?.fat_free_mass}} lbs</td>
+      <td class="centrado">{{ (secondPDF?.results?.fat_free_mass - firstPDF?.results?.fat_free_mass) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.fat_free_mass - firstPDF?.results?.fat_free_mass) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.fat_free_mass - firstPDF?.results?.fat_free_mass) / daysDiference) * 7 | toFixed:2:"up"}} lbs x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Masa muscular</td>
+      <td class="centrado">{{firstPDF?.results?.muscle_mass}} lbs ({{firstPDF?.results?.muscle_mass_score}})</td>
+      <td class="centrado">{{secondPDF?.results?.muscle_mass}} lbs ({{secondPDF?.results?.muscle_mass_score}})</td>
+      <td class="centrado">{{ (secondPDF?.results?.muscle_mass - firstPDF?.results?.muscle_mass) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.muscle_mass - firstPDF?.results?.muscle_mass) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.muscle_mass - firstPDF?.results?.muscle_mass) / daysDiference) * 7 | toFixed:2:"up"}} lbs x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Masa en agua</td>
+      <td class="centrado">{{firstPDF?.results?.water_mass}} lbs</td>
+      <td class="centrado">{{secondPDF?.results?.water_mass}} lbs</td>
+      <td class="centrado">{{ (secondPDF?.results?.water_mass - firstPDF?.results?.water_mass) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.water_mass - firstPDF?.results?.water_mass) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.water_mass - firstPDF?.results?.water_mass) / daysDiference) * 7 | toFixed:2:"up"}} lbs x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Masa osea</td>
+      <td class="centrado">{{firstPDF?.results?.bone_mass}} lbs</td>
+      <td class="centrado">{{secondPDF?.results?.bone_mass}} lbs</td>
+      <td class="centrado">{{ (secondPDF?.results?.bone_mass - firstPDF?.results?.bone_mass) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.bone_mass - firstPDF?.results?.bone_mass) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.bone_mass - firstPDF?.results?.bone_mass) / daysDiference) * 7 | toFixed:2:"up"}} lbs x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Porcentaje en agua</td>
+      <td class="centrado">{{firstPDF?.results?.water_porcentage}} %</td>
+      <td class="centrado">{{secondPDF?.results?.water_porcentage}} %</td>
+      <td class="centrado">{{ (secondPDF?.results?.water_porcentage - firstPDF?.results?.water_porcentage) | toFixed:2:"up"}} %</td>
+      <td class="centrado">{{ ((secondPDF?.results?.water_porcentage - firstPDF?.results?.water_porcentage) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.water_porcentage - firstPDF?.results?.water_porcentage) / daysDiference) * 7 | toFixed:2:"up"}} % x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Puntaje muscular de piernas</td>
+      <td class="centrado">{{firstPDF?.results?.leg_muscle_score}}</td>
+      <td class="centrado">{{secondPDF?.results?.leg_muscle_score}}</td>
+      <td class="centrado">{{ (secondPDF?.results?.leg_muscle_score - firstPDF?.results?.leg_muscle_score) | toFixed:2:"up"}}</td>
+      <td class="centrado">{{ ((secondPDF?.results?.leg_muscle_score - firstPDF?.results?.leg_muscle_score) / daysDiference) | toFixed:2:"up"}} x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.leg_muscle_score - firstPDF?.results?.leg_muscle_score) / daysDiference) * 7 | toFixed:2:"up"}} x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Score Malnutrición Inflamación (SMI)</td>
+      <td class="centrado">{{firstPDF?.results?.smi_score}} ({{firstPDF?.results?.smi_score_label?.split(". ")[1]}})</td>
+      <td class="centrado">{{secondPDF?.results?.smi_score}} ({{secondPDF?.results?.smi_score_label?.split(". ")[1]}})</td>
+      <td class="centrado">{{ (secondPDF?.results?.smi_score - firstPDF?.results?.smi_score) | toFixed:2:"up"}}</td>
+      <td class="centrado">{{ ((secondPDF?.results?.smi_score - firstPDF?.results?.smi_score) / daysDiference) | toFixed:2:"up"}} x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.smi_score - firstPDF?.results?.smi_score) / daysDiference) * 7 | toFixed:2:"up"}} x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Proteina</td>
+      <td class="centrado">{{firstPDF?.results?.protein}} lbs</td>
+      <td class="centrado">{{secondPDF?.results?.protein}} lbs</td>
+      <td class="centrado">{{ (secondPDF?.results?.protein - firstPDF?.results?.protein) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((secondPDF?.results?.protein - firstPDF?.results?.protein) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.protein - firstPDF?.results?.protein) / daysDiference) * 7 | toFixed:2:"up"}} lbs x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Tasa metabolica basal</td>
+      <td class="centrado">{{firstPDF?.results?.basal_metabolic_rate}} kcal ({{firstPDF?.results?.basal_metabolic_rate_label}})</td>
+      <td class="centrado">{{secondPDF?.results?.basal_metabolic_rate}} kcal ({{secondPDF?.results?.basal_metabolic_rate_label}})</td>
+      <td class="centrado">{{ (secondPDF?.results?.basal_metabolic_rate - firstPDF?.results?.basal_metabolic_rate) | toFixed:2:"up"}} kcal</td>
+      <td class="centrado">{{ ((secondPDF?.results?.basal_metabolic_rate - firstPDF?.results?.basal_metabolic_rate) / daysDiference) | toFixed:2:"up"}} kcal x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.basal_metabolic_rate - firstPDF?.results?.basal_metabolic_rate) / daysDiference) * 7 | toFixed:2:"up"}} kcal x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Ingesta diaria calorica</td>
+      <td class="centrado">{{firstPDF?.results?.daily_calorie_intake}} kcal</td>
+      <td class="centrado">{{secondPDF?.results?.daily_calorie_intake}} kcal</td>
+      <td class="centrado">{{ (secondPDF?.results?.daily_calorie_intake - firstPDF?.results?.daily_calorie_intake) | toFixed:2:"up"}} kcal</td>
+      <td class="centrado">{{ ((secondPDF?.results?.daily_calorie_intake - firstPDF?.results?.daily_calorie_intake) / daysDiference) | toFixed:2:"up"}} kcal x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.daily_calorie_intake - firstPDF?.results?.daily_calorie_intake) / daysDiference) * 7 | toFixed:2:"up"}} kcal x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Edad metabolica</td>
+      <td class="centrado">{{firstPDF?.results?.metabolic_age}} años</td>
+      <td class="centrado">{{secondPDF?.results?.metabolic_age}} años</td>
+      <td class="centrado">{{ (secondPDF?.results?.metabolic_age - firstPDF?.results?.metabolic_age) | toFixed:2:"up"}} años</td>
+      <td class="centrado">{{ ((secondPDF?.results?.metabolic_age - firstPDF?.results?.metabolic_age) / daysDiference) | toFixed:2:"up"}} años x dia</td>
+      <td class="centrado">{{ ((secondPDF?.results?.metabolic_age - firstPDF?.results?.metabolic_age) / daysDiference) * 7 | toFixed:2:"up"}} años x semana</td>
+      <td class="centrado">N/A</td>
+    </tr>
+    <tr>
+      <td>Rango fisico</td>
+      <td class="centrado">{{firstPDF?.results?.physique_rating}}</td>
+      <td class="centrado">{{secondPDF?.results?.physique_rating}}</td>
+      <td class="centrado">{{ (firstPDF?.results?.physique_rating === secondPDF?.results?.physique_rating) ? "Sin cambios" : secondPDF?.results?.body_fat_category}}</td>
+      <td class="centrado">N/A</td>
+      <td class="centrado">N/A</td>
+      <td class="centrado">N/A</td>
     </tr>
   </table>
 </div>
