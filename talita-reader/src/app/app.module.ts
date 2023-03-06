@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PdfUpdateComponent } from './pdf-update/pdf-update.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToFixedPipe } from './round.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PdfUpdateComponent
+    PdfUpdateComponent,
+    ToFixedPipe
   ],
   imports: [
     BrowserModule,

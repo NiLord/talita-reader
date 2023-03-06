@@ -98,7 +98,7 @@ def process_desirable_results(splitedText: list, index_start: int) -> TalinaDesi
     response.min_fat_mass = float(body_fat_mass[0])
     response.max_fat_mass = float(body_fat_mass[1])
 
-    bmi = get_number(splitedText[index_start + 2])
+    bmi = get_number(splitedText[index_start + 3])
     response.min_bmi = float(bmi[0])
     response.max_bmi = float(bmi[1])
 

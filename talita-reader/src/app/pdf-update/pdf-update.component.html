@@ -1,3 +1,99 @@
 <form>
-  <input type="file" accept=".pdf" #fileInput (change)="onFileChange(fileInput)">
+  <p>
+    <label for="archivoUno">Archivo uno</label>
+    <input name="archivoUno" type="file" accept=".pdf" #fileInput (change)="onFileChange(fileInput)">
+  </p>
 </form>
+
+<form>
+  <p>
+    <label for="archivoDos">Archivo dos</label>
+    <input type="file" name="archivoDos" accept=".pdf" #fileInput2 (change)="onFileChange(fileInput2)">
+  </p>
+</form>
+
+
+<div *ngIf="firstPDF">
+  <h1>Informacion general de {{firstPDF?.name}} - {{firstPDF?.id}}</h1>
+  <p>Edad: {{firstPDF?.age}} años</p>
+  <p>Altura: {{firstPDF?.height}} cm</p>
+
+  <h2>Informacion deseable </h2>
+  <table>
+    <tr>
+      <th>Informacion</th>
+      <th>Valor</th>
+    </tr>
+    <tr>
+      <td>Peso</td>
+      <td class="centrado">{{firstPDF?.results?.desirableData?.min_weight}} - {{firstPDF?.results?.desirableData?.max_weight}} lbs</td>
+    </tr>
+    <tr>
+      <td>Porcentaje de grasa</td>
+      <td class="centrado">{{firstPDF?.results?.desirableData?.min_fat_porcentage}}% - {{firstPDF?.results?.desirableData?.max_fat_porcentage}}%</td>
+    </tr>
+    <tr>
+      <td>Masa de grasa</td>
+      <td class="centrado">{{firstPDF?.results?.desirableData?.min_fat_mass}} lbs - {{firstPDF?.results?.desirableData?.max_fat_mass}} lbs</td>
+    </tr>
+    <tr>
+      <td>Indice de masa corporal</td>
+      <td class="centrado">{{firstPDF?.results?.desirableData?.min_bmi}} - {{firstPDF?.results?.desirableData?.max_bmi}}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="firstPDF && secondPDF && firstPDF?.id === secondPDF?.id">
+  <h2>Informacion comparativa</h2>
+
+  <table>
+    <tr>
+      <th>Información</th>
+      <th>Info al {{firstPDF?.date?.split(" ")[0]}}</th>
+      <th>Info al {{secondPDF?.date?.split(" ")[0]}}</th>
+      <th>Diferencia entre mediciones</th>
+      <th>Promedio x dia</th>
+      <th>Diferencia con deseable</th>
+    </tr>
+    <tr>
+      <td>Fecha</td>
+      <td class="centrado">{{firstPDF?.date}}</td>
+      <td class="centrado">{{secondPDF?.date}}</td>
+      <td class="centrado">{{daysDiference}} dias</td>
+      <td class="centrado"> N/A </td>
+      <td class="centrado"> N/A</td>
+    </tr>
+    <tr>
+      <td>Peso</td>
+      <td class="centrado">{{firstPDF?.results?.weight}} lbs</td>
+      <td class="centrado">{{secondPDF?.results?.weight}} lbs</td>
+      <td class="centrado">{{ (firstPDF?.results?.weight - secondPDF?.results?.weight) | toFixed:2:"up"}} lbs</td>
+      <td class="centrado">{{ ((firstPDF?.results?.weight - secondPDF?.results?.weight) / daysDiference) | toFixed:2:"up"}} lbs x dia</td>
+      <td class="centrado">{{secondPDF?.results?.weight >= firstPDF?.results?.desirableData?.min_weight &&  secondPDF?.results?.weight <= firstPDF?.results?.desirableData?.max_weight ? "Logrado" : (secondPDF?.results?.weight - firstPDF?.results?.desirableData?.max_weight | toFixed:2:"up") + " lbs"}} </td>
+    </tr>
+    <tr>
+      <td>Indice de masa corporal</td>
+      <td class="centrado">{{firstPDF?.results?.body_mass_index}} %</td>
+      <td class="centrado">{{secondPDF?.results?.body_mass_index}} %</td>
+      <td class="centrado">{{ (firstPDF?.results?.body_mass_index - secondPDF?.results?.body_mass_index) | toFixed:2:"up"}} %</td>
+      <td class="centrado">{{ ((firstPDF?.results?.body_mass_index - secondPDF?.results?.body_mass_index) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{secondPDF?.results?.body_mass_index >= firstPDF?.results?.desirableData?.min_bmi &&  secondPDF?.results?.body_mass_index <= firstPDF?.results?.desirableData?.max_bmi ? "Logrado" : (secondPDF?.results?.body_mass_index - firstPDF?.results?.desirableData?.max_bmi | toFixed:2:"up") + " %"}} </td>
+    </tr>
+    <tr>
+      <td>Porcentaje de grasa</td>
+      <td class="centrado">{{firstPDF?.results?.body_fat}} %</td>
+      <td class="centrado">{{secondPDF?.results?.body_fat}} %</td>
+      <td class="centrado">{{ (firstPDF?.results?.body_fat - secondPDF?.results?.body_fat) | toFixed:2:"up"}} %</td>
+      <td class="centrado">{{ ((firstPDF?.results?.body_fat - secondPDF?.results?.body_fat) / daysDiference) | toFixed:2:"up"}} % x dia</td>
+      <td class="centrado">{{secondPDF?.results?.body_fat >= firstPDF?.results?.desirableData?.min_fat_porcentage &&  secondPDF?.results?.body_fat <= firstPDF?.results?.desirableData?.max_fat_porcentage ? "Logrado" : (secondPDF?.results?.body_fat - firstPDF?.results?.desirableData?.max_fat_porcentage | toFixed:2:"up") + " %"}} </td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="firstPDF && secondPDF && firstPDF?.id !== secondPDF?.id">
+  <h1 class="errorMessage">La informacion de los dos PDF no parece ser de la misma persona</h1>
+</div>
+
+<div *ngIf="firstPDF && !secondPDF">
+  <h1>Favor ingresar el valor del segundo PDF para mostrar informacion comparativa</h1>
+</div>

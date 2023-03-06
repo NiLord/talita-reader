@@ -1,0 +1,16 @@
+table, td {
+    border: 1px solid black;
+}
+
+th {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.centrado {
+    text-align: center;
+}
+
+.errorMessage {
+    color: red;
+}
