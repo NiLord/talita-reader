@@ -1,10 +1,108 @@
-table, td {
-    border: 1px solid black;
+/* Estilo para el contenedor principal */
+.main-container {
+    /* Ancho máximo del contenedor */
+    max-width: 1200px;
+    /* Margen automático para centrar el contenedor */
+    margin: 0 auto;
+    /* Borde redondeado */
+    border-radius: 10px;
+    /* Sombra */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-image: radial-gradient(circle at center, rgba(200,255,200,0.2) 0%, rgba(150,250,150,.1) 50%, rgba(100,240,100,.05) 100%);
+    background-color: #a4c9a40c;
 }
 
-th {
-    border: 1px solid black;
-    text-align: center;
+/* Estilo para los elementos dentro del contenedor */
+.main-container>* {
+    /* Espacio entre los elementos y el borde del contenedor */
+    padding: 20px;
+}
+
+/* Estilo para el encabezado del sitio web */
+.main-container>header {
+    /* Color de fondo */
+    background-color: #f0f0f0;
+}
+
+/* Estilo para el pie de página del sitio web */
+.main-container>footer {
+    /* Color de fondo */
+    background-color: #e0e0e0;
+}
+
+/* Estilo para los encabezados h1, h2 y h3 dentro del contenedor */
+.main-container h1,
+.main-container h2,
+.main-container h3 {
+  /* Fuente Roboto */
+  font-family: "Roboto", sans-serif;
+}
+
+/* Estilo para el encabezado h1 dentro del contenedor */
+.main-container h1 {
+  /* Tamaño de la fuente */
+  font-size: 36px;
+  /* Color de la fuente verde oscuro */
+  color: #006600;
+}
+
+/* Estilo para el encabezado h2 dentro del contenedor */
+.main-container h2 {
+   /* Tamaño de la fuente */
+   font-size: 24px;
+   /* Color de la fuente verde claro */
+   color: #00cc00; 
+}
+
+/* Estilo para el encabezado h3 dentro del contenedor */
+.main-container h3 {
+   /* Tamaño de la fuente */
+   font-size: 18px;
+   /* Color de la fuente gris oscuro */
+   color: #333333; 
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table tr {
+    background-color: #ffffff;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
 }
 
 .centrado {
