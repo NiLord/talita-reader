@@ -13,6 +13,6 @@ export class ProcessPdfService {
     const data = {
       base64
     };
-    return this.http.post<any>('http://127.0.0.1:5000/process-pdf', data);
+    return this.http.post<any>('http://nilord.com:5000/process-pdf', data);
   }
 }
