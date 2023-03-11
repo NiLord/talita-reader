@@ -1,3 +1,4 @@
+version: "3"
 services: 
   api-python:
     build: talita-reader-backend/app/.
