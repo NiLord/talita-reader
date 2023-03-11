@@ -5,3 +5,9 @@ services:
     restart: unless-stopped
     ports: 
       - '5000:5000'
+  front-end:
+    build: talita-reader/.
+    image: 'nilord/talita-reader-frontend:1.0'
+    restart: unless-stopped
+    ports: 
+      - '4200:4200'
